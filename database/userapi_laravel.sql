@@ -14,14 +14,47 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Copiando dados para a tabela userapi_laravel.addresses: ~0 rows (aproximadamente)
-REPLACE INTO `addresses` (`id`, `name`, `user_id`, `state_id`, `city_id`, `street_id`, `created_at`, `updated_at`) VALUES
+-- Copiando estrutura para tabela userapi_laravel.addresses
+CREATE TABLE IF NOT EXISTS `addresses` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int unsigned NOT NULL,
+  `state_id` int unsigned NOT NULL,
+  `city_id` int unsigned NOT NULL,
+  `street_id` int unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `addresses_user_id_foreign` (`user_id`),
+  KEY `addresses_state_id_foreign` (`state_id`),
+  KEY `addresses_city_id_foreign` (`city_id`),
+  KEY `addresses_street_id_foreign` (`street_id`),
+  CONSTRAINT `addresses_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`),
+  CONSTRAINT `addresses_state_id_foreign` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`),
+  CONSTRAINT `addresses_street_id_foreign` FOREIGN KEY (`street_id`) REFERENCES `streets` (`id`),
+  CONSTRAINT `addresses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela userapi_laravel.addresses: ~3 rows (aproximadamente)
+INSERT INTO `addresses` (`id`, `name`, `user_id`, `state_id`, `city_id`, `street_id`, `created_at`, `updated_at`) VALUES
 	(1, 'Endereço #1', 11, 19, 337, 275, '2024-02-13 10:49:30', '2024-02-13 10:49:30'),
 	(2, 'Endereço #2', 11, 25, 463, 202, '2024-02-13 10:49:30', '2024-02-13 10:49:30'),
 	(3, 'Endereço #3', 11, 19, 336, 171, '2024-02-13 10:49:30', '2024-02-13 10:49:30');
 
+-- Copiando estrutura para tabela userapi_laravel.cities
+CREATE TABLE IF NOT EXISTS `cities` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `state_id` int unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cities_state_id_foreign` (`state_id`),
+  CONSTRAINT `cities_state_id_foreign` FOREIGN KEY (`state_id`) REFERENCES `states` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=501 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Copiando dados para a tabela userapi_laravel.cities: ~500 rows (aproximadamente)
-REPLACE INTO `cities` (`id`, `state_id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `cities` (`id`, `state_id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Acrelândia', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(2, 1, 'Assis Brasil', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(3, 1, 'Brasiléia', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
@@ -523,10 +556,31 @@ REPLACE INTO `cities` (`id`, `state_id`, `name`, `created_at`, `updated_at`) VAL
 	(499, 27, 'Silvanópolis', '2024-02-13 10:49:26', '2024-02-13 10:49:26'),
 	(500, 27, 'Sítio Novo do Tocantins', '2024-02-13 10:49:26', '2024-02-13 10:49:26');
 
+-- Copiando estrutura para tabela userapi_laravel.failed_jobs
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Copiando dados para a tabela userapi_laravel.failed_jobs: ~0 rows (aproximadamente)
 
--- Copiando dados para a tabela userapi_laravel.migrations: ~0 rows (aproximadamente)
-REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
+-- Copiando estrutura para tabela userapi_laravel.migrations
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela userapi_laravel.migrations: ~8 rows (aproximadamente)
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
@@ -536,12 +590,47 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(7, '2024_02_12_233733_create_streets_table', 1),
 	(8, '2024_02_13_004905_create_addresses_table', 1);
 
+-- Copiando estrutura para tabela userapi_laravel.password_reset_tokens
+CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Copiando dados para a tabela userapi_laravel.password_reset_tokens: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela userapi_laravel.personal_access_tokens
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Copiando dados para a tabela userapi_laravel.personal_access_tokens: ~0 rows (aproximadamente)
 
+-- Copiando estrutura para tabela userapi_laravel.states
+CREATE TABLE IF NOT EXISTS `states` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uf` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Copiando dados para a tabela userapi_laravel.states: ~27 rows (aproximadamente)
-REPLACE INTO `states` (`id`, `name`, `uf`, `created_at`, `updated_at`) VALUES
+INSERT INTO `states` (`id`, `name`, `uf`, `created_at`, `updated_at`) VALUES
 	(1, 'Acre', 'AC', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(2, 'Alagoas', 'AL', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(3, 'Amapá', 'AP', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
@@ -570,8 +659,20 @@ REPLACE INTO `states` (`id`, `name`, `uf`, `created_at`, `updated_at`) VALUES
 	(26, 'Sergipe', 'SE', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(27, 'Tocantins', 'TO', '2024-02-13 10:49:22', '2024-02-13 10:49:22');
 
+-- Copiando estrutura para tabela userapi_laravel.streets
+CREATE TABLE IF NOT EXISTS `streets` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `city_id` int unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `streets_city_id_foreign` (`city_id`),
+  CONSTRAINT `streets_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=403 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Copiando dados para a tabela userapi_laravel.streets: ~402 rows (aproximadamente)
-REPLACE INTO `streets` (`id`, `city_id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `streets` (`id`, `city_id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Avenida Paraná - Centro', '2024-02-13 10:49:26', '2024-02-13 10:49:26'),
 	(2, 343, 'Rua Nossa Senhora de Fátima  - Centro', '2024-02-13 10:49:26', '2024-02-13 10:49:26'),
 	(3, 98, 'Avenida Getúlio Vargas  - Centro', '2024-02-13 10:49:26', '2024-02-13 10:49:26'),
@@ -975,8 +1076,24 @@ REPLACE INTO `streets` (`id`, `city_id`, `name`, `created_at`, `updated_at`) VAL
 	(401, 479, 'Avenida 31 de Março - Centro', '2024-02-13 10:49:30', '2024-02-13 10:49:30'),
 	(402, 480, 'Avenida Francisco Vilar Horta - Patrimônio Novo', '2024-02-13 10:49:30', '2024-02-13 10:49:30');
 
--- Copiando dados para a tabela userapi_laravel.users: ~10 rows (aproximadamente)
-REPLACE INTO `users` (`id`, `first_name`, `last_name`, `phone_number`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+-- Copiando estrutura para tabela userapi_laravel.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela userapi_laravel.users: ~11 rows (aproximadamente)
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone_number`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'Sandro', 'Pereira', '40955190671', 'alcantara.silvana@example.org', '2024-02-13 10:49:21', '$2y$12$XukoLFtc5Qhxtr5yQ8Nrgu5cDIKBmvW9mD6JjT7sO05XwlhLEfs8e', 'birSPTfTrw', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(2, 'Rafael', 'Casanova', '66994478830', 'edesouza@example.net', '2024-02-13 10:49:22', '$2y$12$XukoLFtc5Qhxtr5yQ8Nrgu5cDIKBmvW9mD6JjT7sO05XwlhLEfs8e', 'KdMrVJsHgF', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
 	(3, 'Adriel', 'Galindo', '11905776585', 'dcarrara@example.com', '2024-02-13 10:49:22', '$2y$12$XukoLFtc5Qhxtr5yQ8Nrgu5cDIKBmvW9mD6JjT7sO05XwlhLEfs8e', '2EqJ2lddv9', '2024-02-13 10:49:22', '2024-02-13 10:49:22'),
