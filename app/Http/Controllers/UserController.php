@@ -20,7 +20,6 @@ class UserController extends Controller
         }
         else
         {
-
             $users = User::all();
 
             return UserResource::collection($users);
