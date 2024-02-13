@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Address;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * The relationship attributes that will be picked up automatically.
+     *
+     * @var array<string, string>
+     */
+    //protected $with = [
+    //    'addresses',
+    //];
+
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
 }

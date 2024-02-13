@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\StreetController;
+use App\Http\Controllers\AddressController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,4 +42,10 @@ Route::group(['prefix' => 'api'], function()
     Route::post('/streets', [StreetController::class, 'store']);
     Route::put('/streets/{id}', [StreetController::class, 'update']);
     Route::delete('/streets/{id}', [StreetController::class, 'destroy']);
+
+    // API de Address (Endereços)
+    Route::get('/addresses/{id?}', [AddressController::class, 'index']);
+    Route::post('/addresses', [AddressController::class, 'store']);
+    Route::put('/addresses/{id}', [AddressController::class, 'update']);
+    Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
 });

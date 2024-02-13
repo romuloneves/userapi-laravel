@@ -14,13 +14,13 @@ class UserController extends Controller
     {
         if($id)
         {
-            $user = User::findOrFail($id);
+            $user = User::with('addresses')->findOrFail($id);
 
             return new UserResource($user);
         }
         else
         {
-            $users = User::all();
+            $users = User::with('addresses')->get();
 
             return UserResource::collection($users);
         }

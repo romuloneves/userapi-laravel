@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('streets', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('city_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned();
             $table->foreign('city_id')
                     ->references('id')
                     ->on('cities')
