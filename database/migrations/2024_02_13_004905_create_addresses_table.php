@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Criação da tabela "addresses" através da execução dessa migration.
+     * Relaciona todas as suas chaves estrangeiras às tabelas relacionadas.
      */
     public function up(): void
     {

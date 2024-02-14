@@ -9,7 +9,7 @@ use App\Models\City;
 class CitySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Criação de aproximadamente 500 seeders de estados para popular o banco de dados.
      */
     public function run(): void
     {

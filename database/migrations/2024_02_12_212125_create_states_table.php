@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Criação da tabela "states" através da execução dessa migration.
      */
     public function up(): void
     {

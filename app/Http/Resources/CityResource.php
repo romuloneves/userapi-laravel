@@ -8,7 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class CityResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the City resource into an array.
+     * Transforma a resource de City em uma array.
      *
      * @return array<string, mixed>
      */

@@ -51,11 +51,17 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
     //protected $with = [
     //    'addresses',
     //];
 
-
+    /**
+    * The has Many "Addresses" Relationship
+    * Relacionamento para muitos de "Addresses"
+    *
+    * @var array
+    */
     public function addresses()
     {
         return $this->hasMany(Address::class);

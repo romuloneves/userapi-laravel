@@ -12,18 +12,27 @@ class AddressController extends Controller
 {
     public function index(string $id = null)
     {
-        /* Relacionamentos que serão tragos juntos ao objeto $address.
-         * Convencionalmente são definidos pela variável $with */
+        /**
+         * Relacionamentos que serão trazidos juntos ao objeto $address.
+         * Convencionalmente são definidos pela variável $with
+        */
         
         $with = ['user', 'street', 'city', 'state'];
-        if($id)
+
+        // Obtém um registro de Address() de acordo com o $id especificado.        
+
+        if($id) // Verifica a existência da variável $id.
         {
+            // Caso não seja nulo, o resultado equivalerá a uma array específica daquele id selecionado.
+
             $address = Address::with($with)->findOrFail($id);
 
             return new AddressResource($address);
         }
         else
         {
+            // Em caso de nulo, retornará uma array com todos os resultados pertencentes à Address().
+
             $addresses = Address::with($with)->get();
 
             return AddressResource::collection($addresses);
@@ -32,6 +41,8 @@ class AddressController extends Controller
 
     public function store(Request $request)
     {
+        // Insere um novo registro em Address() utilizando dados armazenados em $data.
+
         $data = $request->all();
         $address = Address::create($data);
 
@@ -40,6 +51,8 @@ class AddressController extends Controller
 
     public function update(Request $request, string $id)
     {
+        // Atualiza um registro existente em Address() de acordo com o $id especificado, utilizando dados armazenados em $data.
+
         $address = Address::findOrFail($id);
         $data = $request->all();
 
@@ -50,6 +63,8 @@ class AddressController extends Controller
 
     public function destroy(string $id)
     {
+        // Remove um registro de Address() de acordo com o $id especificado.
+
         Address::findOrFail($id)->delete();
 
         return response()->json([], Response::HTTP_NO_CONTENT);

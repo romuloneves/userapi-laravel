@@ -9,12 +9,12 @@ use App\Models\Address;
 class AddressSeeder extends Seeder
 {
     /**
-     * Execução de seeds de Address (Endereço).
+     * Execução de seeders de Address (Endereço).
      */
     public function run(): void
     {
         /**
-         * Criação de três seeds estáticos de endereço relacionados ao usuário estático (id 11)
+         * Criação de três seeders estáticos de endereço relacionados ao usuário estático (id 11)
          */
         
         # Rua Professora Emília Esteves - Centro - São José do Vale do Rio Preto - RJ

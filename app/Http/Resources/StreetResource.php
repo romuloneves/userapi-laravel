@@ -8,7 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class StreetResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the Street resource into an array.
+     * Transforma a resource de Street em uma array.
      *
      * @return array<string, mixed>
      */

@@ -8,7 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class AddressResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the Address resource into an array.
+     * Transforma a resource de Address em uma array.
      *
      * @return array<string, mixed>
      */

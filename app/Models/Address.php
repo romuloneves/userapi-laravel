@@ -14,20 +14,51 @@ class Address extends Model
 {
     use HasFactory;
 
+    /**
+    * The belongs to "User" Relationship
+    * Relacionamento pertence ao "User"
+    *
+    * @var array
+    */
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
+
+    /**
+    * The belongs to "State" Relationship
+    * Relacionamento pertence ao "State"
+    *
+    * @var array
+    */
+
     public function state()
     {
         return $this->belongsTo(State::class);
     }
 
+
+    /**
+    * The belongs to "City" Relationship
+    * Relacionamento pertence ao "City"
+    *
+    * @var array
+    */
+
     public function city()
     {
         return $this->belongsTo(City::class);
     }
+
+
+    /**
+    * The belongs to "Street" Relationship
+    * Relacionamento pertence ao "Street"
+    *
+    * @var array
+    */
 
     public function street()
     {

@@ -17,7 +17,7 @@ class UserFactory extends Factory
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
+     * Define a Factory de User, utilizando alguns métodos do Faker para gerar dados prontos.
      *
      * @return array<string, mixed>
      */

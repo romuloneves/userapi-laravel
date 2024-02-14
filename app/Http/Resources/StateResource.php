@@ -8,7 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class StateResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the State resource into an array.
+     * Transforma a resource de State em uma array.
      *
      * @return array<string, mixed>
      */

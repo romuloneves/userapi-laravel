@@ -9,7 +9,7 @@ use App\Models\Street;
 class StreetSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Criação de aproximadamente 500 seeders de ruas com bairros para popular o banco de dados.
      */
     public function run(): void
     {

@@ -10,7 +10,7 @@ use App\Models\State;
 class StateSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Criação das seeders de todos os estados brasileiros e suas unidades federativas.
      */
     public function run(): void
     {

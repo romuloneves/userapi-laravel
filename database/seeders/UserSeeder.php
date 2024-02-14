@@ -11,7 +11,7 @@ use App\Models\User;
 class UserSeeder extends Seeder
 {
     /**
-     * Execução de seeds de User (Usuário).
+     * Execução de seeders de User (Usuário).
      */
     public function run(): void
     {
